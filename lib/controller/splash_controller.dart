@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:barbershop/service/check_connectivity.dart';
+import 'package:barbershop/view/homePage.dart';
 import 'package:barbershop/view/home_view.dart';
+import 'package:barbershop/view/register_view.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -24,12 +26,15 @@ class SplashController extends GetxController {
       var statusCode = await CheckConnectivity.checkNet();
       code.value = statusCode;
       if (code.value == 200)
-        Timer(Duration(milliseconds: 2000), () => Get.to(() => HomeView()));
-      else {
-        loading.value = false;
+        Timer(Duration(milliseconds: 2000), () => Get.to(() => HomePage()));
+      else if (code.value == 401) 
+        Timer(Duration(milliseconds: 2000), () => Get.to(() => RegisterView()));
+        else {
+          loading.value = false;
         tryAgain.value = true;
-        print(code.value);
-      }
+        }
+
+      
     } finally {}
   }
 }

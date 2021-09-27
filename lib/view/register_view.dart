@@ -4,6 +4,7 @@ import 'package:barbershop/view/verification_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter_svg/svg.dart';
@@ -118,8 +119,9 @@ class _RegisterViewState extends State<RegisterView> {
                 },
                 onSubmitted: (value) {
                   controller.sendPhone(value);
+                  controller.textVisible.value = false;
+                  controller.loadingVisible.value = true;
                   print(value);
-                  Get.to(VerficationView());
                 },
               ),
             ),
@@ -128,21 +130,41 @@ class _RegisterViewState extends State<RegisterView> {
             ),
             TextButton(
               onPressed: () {
-                controller.sendPhone('0');
+                controller.sendPhone(controller.phoneNumber.value);
+                controller.textVisible.value = false;
+                controller.loadingVisible.value = true;
+                print(controller.phoneNumber.value);
               },
               child: Container(
                 child: Center(
-                  child: Text(
-                    'تایید شماره',
-                    style: TextStyle(
-                      color: primaryColorDark,
-                      fontFamily: 'sans',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
+                    child: new Stack(
+                  children: [
+                    Obx(
+                      () => Visibility(
+                        visible: controller.textVisible.value,
+                        child: Text(
+                          'تایید شماره',
+                          style: TextStyle(
+                            color: primaryColorDark,
+                            fontFamily: 'sans',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                    Obx(
+                      () => Visibility(
+                        visible: controller.loadingVisible.value,
+                        child: SpinKitThreeBounce(
+                          size: height * 0.01,
+                          color: primaryColorLight,
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
                 width: 200,
                 height: 45,
                 decoration: BoxDecoration(

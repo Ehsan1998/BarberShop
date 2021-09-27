@@ -1,5 +1,6 @@
 import 'package:barbershop/view/homePage.dart';
 import 'package:barbershop/view/register_view.dart';
+import 'package:barbershop/view/splash_view.dart';
 import 'package:barbershop/view/verification_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         primaryColorLight: Colors.white,
         cardColor: Color(0xFF1F2630),
       ),
-      home: HomePage(),
+      home: SplashView(),
     );
   }
 }
