@@ -56,6 +56,8 @@ class CheckConnectivity {
   static Future getAccesstoken() async {
     final String url = 'https://www.ehsankatebi.ir/api/login';
     print('fuck ur cooode');
+    print(GetStorage().read('phone'));
+    print(GetStorage().read('code'));
     var response = await http.post(Uri.parse(url), body: {
       "phone": GetStorage().read('phone'),
       "code": GetStorage().read('code')

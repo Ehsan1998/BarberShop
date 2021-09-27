@@ -13,7 +13,7 @@ class RegisterController extends GetxController {
 
   void sendPhone(String phone) async {
     try {
-      GetStorage().write('phone', phone);
+      GetStorage().write('phone', "0$phone");
       print(phone);
       var statusCode = await CheckConnectivity.getCode(phone);
       phoneCode.value = statusCode;

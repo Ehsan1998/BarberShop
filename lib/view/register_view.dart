@@ -17,7 +17,7 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   RegisterController controller = Get.put(RegisterController());
 
-  var textController = MaskedTextController(mask: '000 000 0000');
+  var textController = MaskedTextController(mask: '0000000000');
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _RegisterViewState extends State<RegisterView> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 165.0),
+              padding: EdgeInsets.only(top: height * 0.2),
               child: Center(
                 child: Container(
                   child: SvgPicture.asset('image/logo.svg'),
@@ -56,11 +56,11 @@ class _RegisterViewState extends State<RegisterView> {
               ),
             ),
             SizedBox(
-              height: 80,
+              height: height * 0.097,
             ),
             Center(
               child: Container(
-                width: 280,
+                width: width * 0.7,
                 child: Text(
                   'شماره موبایل',
                   textAlign: TextAlign.right,
@@ -137,34 +137,35 @@ class _RegisterViewState extends State<RegisterView> {
               },
               child: Container(
                 child: Center(
-                    child: new Stack(
-                  children: [
-                    Obx(
-                      () => Visibility(
-                        visible: controller.textVisible.value,
-                        child: Text(
-                          'تایید شماره',
-                          style: TextStyle(
-                            color: primaryColorDark,
-                            fontFamily: 'sans',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                  child: new Stack(
+                    children: [
+                      Obx(
+                        () => Visibility(
+                          visible: controller.textVisible.value,
+                          child: Text(
+                            'تایید شماره',
+                            style: TextStyle(
+                              color: primaryColorDark,
+                              fontFamily: 'sans',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
-                    Obx(
-                      () => Visibility(
-                        visible: controller.loadingVisible.value,
-                        child: SpinKitThreeBounce(
-                          size: height * 0.01,
-                          color: primaryColorLight,
+                      Obx(
+                        () => Visibility(
+                          visible: controller.loadingVisible.value,
+                          child: SpinKitThreeBounce(
+                            size: height * 0.01,
+                            color: primaryColorLight,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )),
+                    ],
+                  ),
+                ),
                 width: 200,
                 height: 45,
                 decoration: BoxDecoration(

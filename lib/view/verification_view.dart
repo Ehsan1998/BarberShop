@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:barbershop/controller/register_controller.dart';
 import 'package:barbershop/view/home_view.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,11 +17,10 @@ class VerficationView extends StatefulWidget {
 }
 
 class _VerificationViewState extends State<VerficationView> {
-  RegisterController controller = Get.put(RegisterController());
   VerificationController verificationController =
       Get.put(VerificationController());
 
-  var textController = MaskedTextController(mask: '0    0    0    0    0    0');
+  var textController = MaskedTextController(mask: '000000');
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _VerificationViewState extends State<VerficationView> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 165.0),
+              padding: EdgeInsets.only(top: height * 0.2),
               child: Center(
                 child: Container(
                   child: SvgPicture.asset('image/logo.svg'),
@@ -96,7 +96,7 @@ class _VerificationViewState extends State<VerficationView> {
                   FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                   LengthLimitingTextInputFormatter(10),
                 ],
-                autofocus: true,
+                
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -112,10 +112,12 @@ class _VerificationViewState extends State<VerficationView> {
                     ),
                     border: InputBorder.none),
                 onChanged: (value) {
-                  controller.phoneNumber.value = value;
+                  GetStorage().write('code', value);
                   print('${value.toString().replaceAll(RegExp(' '), '')}');
                 },
                 onSubmitted: (value) {
+                  verificationController.textVisible.value = false;
+                  verificationController.loadingVisible.value = true;
                   GetStorage().write('code', value);
                   verificationController.getAccess();
                 },
@@ -126,19 +128,40 @@ class _VerificationViewState extends State<VerficationView> {
             ),
             TextButton(
               onPressed: () {
-                Get.to(() => HomePage());
+                verificationController.textVisible.value = false;
+                verificationController.loadingVisible.value = true;
+                print(GetStorage().read('code'));
+                verificationController.getAccess();
               },
               child: Container(
                 child: Center(
-                  child: Text(
-                    'ورود به برنامه',
-                    style: TextStyle(
-                      color: primaryColorDark,
-                      fontFamily: 'sans',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                    textAlign: TextAlign.center,
+                  child: new Stack(
+                    children: [
+                      Obx(
+                        () => Visibility(
+                          visible: verificationController.textVisible.value,
+                          child: Text(
+                            'ورود به لینست',
+                            style: TextStyle(
+                              color: primaryColorDark,
+                              fontFamily: 'sans',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      Obx(
+                        () => Visibility(
+                          visible: verificationController.loadingVisible.value,
+                          child: SpinKitThreeBounce(
+                            size: height * 0.01,
+                            color: primaryColorLight,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 width: 200,

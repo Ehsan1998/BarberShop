@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         primaryColorLight: Colors.white,
         cardColor: Color(0xFF1F2630),
       ),
-      home: SplashView(),
+      home: HomePage(),
     );
   }
 }
