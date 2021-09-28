@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:barbershop/controller/register_controller.dart';
 import 'package:barbershop/model/accessToken.dart';
+import 'package:barbershop/model/ads.dart';
 import 'package:barbershop/model/barbers.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -52,6 +53,23 @@ class CheckConnectivity {
     print('ur fucking response code is ${response.statusCode}');
     return response.statusCode;
   }
+
+static Future fetchAds() async {
+    final String url = 'https://www.ehsankatebi.ir/api/advertising';
+    var response = await http.get(Uri.parse(url), headers: {
+      'Authorization':
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMTMzMzhmMzAyNjFiZDc3ZDBiYTE4M2UwYTgxMDA5OTliOGIyMDhiNjFhOGJmZmI2ZTllMTdjMjhlNTlmNjY1OWY1NDQxMmJkMDRkYTkwYjMiLCJpYXQiOjE2MzI3MzI5MDQuNDU3MDU3LCJuYmYiOjE2MzI3MzI5MDQuNDU3MDY3LCJleHAiOjE2NjQyNjg5MDQuNDQ3Mjk1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.bSPzxWIA-e-YGN-kZBxvAzowY8yz1IMmTbaApkFW-PGajp0KDNxXSM81c-IPSnjfib7Y3ajE8gbC7maFTgTW8SoqYDGcanSQzhg8JKUqo5ywthiHp_zFteUOcUkiiybOJsrYKim7mnmONOrZ95pzm7cCsJp8MOV60gx4scxYWNpT6yxQeOaqWs0mSUy2bYvFE1UsvFJLh3jgw-8HZGFo0VY8ojuz-JXyJzwKNu-visvHmSY9Bg9AxA5aj3rH84bPZIQ_HxSOQz4EbmoYLtpu1S07M0ew6untH9VJ9oRCy4aUTdTsacU5AH2zzeVLSV7DfeGSeVi-8CNw9HDNf-jblx0H1j9qGw5KGEGxb3Jw2UzC-FjkvojzgQChXtc-IGVvRFRamN1fasQIaCpt3_2UtXLr6CvsPTRZue1VGo-VAd1Xo4toPvLY_JC1ugFO7Ij-CcnzW7VY83J7yizAAsK4Lu8lB7bD9C57JYV6iYxodz6PvfIEazht0iGlpVy_XNEeyr2qGtD4QUZ1nxaX5nOaThc08S8QVEozDkOqToUXA7c06ORzNhdWD9pPcp1XcoALFwWhlZPy9pyFvgGPr8micdY958wyASviasme_RsIq3LQCUlAnKG2Q1BoTZuvnLwfNR1w-QWypW522Wd5-BsXY5HAfqM3tJsUc3v4yZvdR0I',
+      'Accept': 'application/json',
+    });
+    print('fuck ur code ${response.statusCode}');
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      var data = adsFromJson(jsonString);
+      return data;
+    } else
+      return null;
+  }
+
 
   static Future getAccesstoken() async {
     final String url = 'https://www.ehsankatebi.ir/api/login';

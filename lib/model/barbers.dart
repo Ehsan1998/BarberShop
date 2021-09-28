@@ -35,6 +35,7 @@ class Datum {
     this.imageHairdressingDegree,
     this.latitude,
     this.longitude,
+    this.user,
   });
 
   String nameShop;
@@ -46,6 +47,7 @@ class Datum {
   String imageHairdressingDegree;
   double latitude;
   double longitude;
+  User user;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         nameShop: json["name_shop"],
@@ -57,6 +59,7 @@ class Datum {
         imageHairdressingDegree: json["image_hairdressing_degree"],
         latitude: json["latitude"].toDouble(),
         longitude: json["longitude"].toDouble(),
+        user: User.fromJson(json["user"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -69,5 +72,68 @@ class Datum {
         "image_hairdressing_degree": imageHairdressingDegree,
         "latitude": latitude,
         "longitude": longitude,
+        "user": user.toJson(),
       };
+}
+
+class User {
+  User({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.phone,
+    this.image,
+    this.deletedAt,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int id;
+  dynamic firstName;
+  dynamic lastName;
+  String phone;
+  Image image;
+  dynamic deletedAt;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        phone: json["phone"],
+        image: imageValues.map[json["image"]],
+        deletedAt: json["deleted_at"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "first_name": firstName,
+        "last_name": lastName,
+        "phone": phone,
+        "image": imageValues.reverse[image],
+        "deleted_at": deletedAt,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+enum Image { STORAGE }
+
+final imageValues = EnumValues({"/storage/": Image.STORAGE});
+
+class EnumValues<T> {
+  Map<String, T> map;
+  Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    if (reverseMap == null) {
+      reverseMap = map.map((k, v) => new MapEntry(v, k));
+    }
+    return reverseMap;
+  }
 }

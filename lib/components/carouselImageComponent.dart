@@ -1,13 +1,12 @@
+import 'package:barbershop/controller/home_tab_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import 'package:barbershop/controller/movieListController.dart';
-
 
 class NewComponent {
-  MovieListController movieListController1 = Get.put(MovieListController());
+  HomeTabController homeTabController = Get.put(HomeTabController());
   List<Widget> imageItem() {
-    return movieListController1.imgUrl
+    return homeTabController.imgUrl
         .map((element) => GestureDetector(
               onTap: () {
               },
