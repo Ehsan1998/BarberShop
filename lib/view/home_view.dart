@@ -1,4 +1,5 @@
 import 'package:barbershop/controller/home_tab_controller.dart';
+import 'package:barbershop/controller/movieListController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -13,6 +14,8 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final HomeTabController homeTabController = Get.put(HomeTabController());
+  final MovieListController movieListController =
+      Get.put(MovieListController());
 
   @override
   void dispose() {
@@ -203,7 +206,7 @@ class _HomeViewState extends State<HomeView> {
                                                               DecorationImage(
                                                             fit: BoxFit.fill,
                                                             image: NetworkImage(
-                                                                'https://www.ehsankatebi.ir${homeTabController.barbersSuggest.value.data[position].imageHairdressingDegree}'),
+                                                                'https://image.tmdb.org/t/p/w500/${movieListController.nowPlayingMovie.value.results[position].posterPath}'),
                                                           ),
                                                         ),
                                                       ),
@@ -371,7 +374,7 @@ class _HomeViewState extends State<HomeView> {
                                                               DecorationImage(
                                                             fit: BoxFit.fill,
                                                             image: NetworkImage(
-                                                                'https://www.ehsankatebi.ir${homeTabController.barbersOffer.value.data[position].imageHairdressingDegree}'),
+                                                                'https://image.tmdb.org/t/p/w500/${movieListController.nowPlayingMovie.value.results[position].posterPath}'),
                                                           ),
                                                         ),
                                                       ),

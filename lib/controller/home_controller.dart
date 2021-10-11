@@ -1,4 +1,4 @@
-import 'package:barbershop/view/appointment_view.dart';
+import 'package:barbershop/view/map_view.dart';
 import 'package:barbershop/view/home_view.dart';
 import 'package:barbershop/view/profile_view.dart';
 import 'package:barbershop/view/search_view.dart';
@@ -10,6 +10,7 @@ class HomeController extends GetxController {
 
   final List<Widget> tabs = [
     ProfileView(),
+    MapView(),
     SearchView(),
     HomeView(),
   ];

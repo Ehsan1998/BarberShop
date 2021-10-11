@@ -11,12 +11,12 @@ import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_storage/get_storage.dart';
 
-class VerficationView extends StatefulWidget {
+class VerificationView extends StatefulWidget {
   @override
   _VerificationViewState createState() => _VerificationViewState();
 }
 
-class _VerificationViewState extends State<VerficationView> {
+class _VerificationViewState extends State<VerificationView> {
   VerificationController verificationController =
       Get.put(VerificationController());
 
@@ -96,7 +96,6 @@ class _VerificationViewState extends State<VerficationView> {
                   FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                   LengthLimitingTextInputFormatter(10),
                 ],
-                
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
                 style: TextStyle(

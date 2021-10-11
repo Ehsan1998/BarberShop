@@ -1,15 +1,16 @@
 import 'package:barbershop/controller/home_tab_controller.dart';
+import 'package:barbershop/controller/movieListController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-
 class NewComponent {
   HomeTabController homeTabController = Get.put(HomeTabController());
+  final MovieListController movieListController =
+      Get.put(MovieListController());
   List<Widget> imageItem() {
-    return homeTabController.imgUrl
+    return movieListController.imgUrl
         .map((element) => GestureDetector(
-              onTap: () {
-              },
+              onTap: () {},
               child: ClipRRect(
                 child: Image.network(
                   element,

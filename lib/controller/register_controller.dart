@@ -19,7 +19,7 @@ class RegisterController extends GetxController {
       phoneCode.value = statusCode;
       print('ssssssstaaaaaaaaaaaaatuuuuuuuuuuuus$statusCode');
       if (statusCode == 200)
-        Get.to(VerficationView());
+        Get.to(VerificationView());
       else {
         print('elseeeeeeeeeeeeeeeeeeeeeee');
         textVisible.value = true;

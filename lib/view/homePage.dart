@@ -70,6 +70,10 @@ class _HomePageState extends State<HomePage> {
                 label: 'پروفایل',
               ),
               BottomNavigationBarItem(
+                icon: Icon(Icons.map),
+                label: 'نقشه',
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'جستجو',
               ),

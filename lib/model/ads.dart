@@ -10,7 +10,7 @@ String adsToJson(Ads data) => json.encode(data.toJson());
 
 class Ads {
   Ads({
-    this.data,
+    this.data!,
   });
 
   List<Datum> data;

@@ -32,7 +32,7 @@ class HomeTabController extends GetxController {
               'https://www.ehsankatebi.ir/${adsModel.value.data[i].image}');
         }
       }
-    } finally {}
+    } finally {}[]
   }
 
   void fetchBarberList() async {

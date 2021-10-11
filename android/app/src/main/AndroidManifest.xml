@@ -5,6 +5,8 @@
    
         android:label="barbershop"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAQP503byDTuUUsCBPHJdrTAMZsTDV0UWc"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
